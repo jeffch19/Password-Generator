@@ -33,6 +33,12 @@ function getPasswordCriteria() {
   }
 }
 
+// Generate a random Character
+function getRandomCharacter(charSet) {
+  const randomIndex = Math.floor(Math.random() * charSet.length);
+  return charSet.charAt(randomIndex);
+}
+
 
 // Write password to the #password input
 function writePassword() {
