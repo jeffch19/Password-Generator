@@ -7,6 +7,53 @@ var includeNumbers = false;
 var includeSpecialCharacters = false;
 
 
+// Generate a random Character from a character set
+
+function getRandomCharacter(charSet) {
+  const randomIndex = Math.floor(Math.random() * charSet.length);
+  return charSet.charAt(randomIndex);
+}
+
+// Generate password
+
+function generatePassword(length, useLowercase, useUppercase, useNumbers, useSpecialCharacters) {
+  const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
+  const uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const numberChars = "0123456789";
+  const specialChars = "!@#$%^&*()-_=+[]{}|;:'\",.<>?/\\";
+  
+  let charSet = "";
+  
+  if (useLowercase) {
+    charSet += lowercaseChars;
+  }
+  
+  if (useUppercase) {
+    charSet += uppercaseChars;
+  }
+  
+  if (useNumbers) {
+    charSet += numberChars;
+  }
+  
+  if (useSpecialCharacters) {
+    charSet += specialChars;
+  }
+  
+  let generatedPassword = "";
+
+  for (let i = 0; i < length; i++) {
+    generatedPassword += getRandomCharacter(charSet);
+  }
+
+  return generatedPassword;
+}
+
+
+
+
+// Collect password criteria
+
 function getPasswordCriteria() {
   var password = prompt("Please choose a desired length for your password between 8 and 124 characters.");
 
@@ -33,11 +80,13 @@ function getPasswordCriteria() {
   }
 }
 
-// Generate a random Character
-function getRandomCharacter(charSet) {
-  const randomIndex = Math.floor(Math.random() * charSet.length);
-  return charSet.charAt(randomIndex);
-}
+
+
+
+
+
+
+
 
 
 // Write password to the #password input
