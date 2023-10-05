@@ -2,18 +2,15 @@
 var generateBtn = document.querySelector("#generate");
 var passwordLength = 0;
 var includeLowercase = false;
-var includeUppercase = false; 
+var includeUppercase = false;
 var includeNumbers = false;
 var includeSpecialCharacters = false;
 
 
-
-
-function generatePassword() {
+function getPasswordCriteria() {
   var password = prompt("Please choose a desired length for your password between 8 and 124 characters.");
 
   if (password !== null) {
-
     passwordLength = parseInt(password);
 
     if (isNaN(passwordLength) || passwordLength < 8 || passwordLength > 128) {
@@ -21,22 +18,20 @@ function generatePassword() {
     } else {
       includeLowercase = confirm("Include lowercase letters in your password?");
       includeUppercase = confirm("Include uppercase letters in your password?");
-      includeNumbers = confirm("Include numbers in your password?")
+      includeNumbers = confirm("Include numbers in your password?");
       includeSpecialCharacters = confirm("Include special characters in your password?");
       if (!includeLowercase && !includeUppercase && !includeNumbers && !includeSpecialCharacters) {
         alert("You must select at least one character type to include.");
       } else {
-        alert("Password Criteria collected. Generating password...");
-        var generatedPassword = generatePassword (passwordLength, includeLowercase, includeUppercase, includeNumbers, includeSpecialCharacters);
+        alert("Password criteria collected. Generating password...");
+        var generatedPassword = generatePassword(passwordLength, includeLowercase, includeUppercase, includeNumbers, includeSpecialCharacters);
+        alert("Generated password: " + generatedPassword);
       }
     }
-
-} else {
-  alert("Password generation canceled.")
+  } else {
+    alert("Password generation canceled.");
+  }
 }
-
-function generatePassword(length, useLowercase, useUppercase, useNumbers, useSpecialCharacters) {
-
 
 
 // Write password to the #password input
@@ -69,9 +64,3 @@ generateBtn.addEventListener("click", writePassword);
 // THEN a password is generated that matches the selected criteria
 // WHEN the password is generated
 // THEN the password is either displayed in an alert or written to the page
-password.length >= 8 &&
-password.length <= 128 &&
-/[0-9]/.test(password) &&
-/[A-Z]/.test(password) &&
-/[a-z]/.test(password) &&
-/[!@#$%^&*:;,.?~\\-]/.test(password)
