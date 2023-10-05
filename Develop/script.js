@@ -1,27 +1,41 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
+var passwordLength = 0;
+var includeLowercase = false;
+var includeUppercase = false; 
+var includeNumbers = false;
+var includeSpecialCharacters = false;
+
+
+
 
 function generatePassword() {
-  var password = prompt("How many characters would you like your password to contain?");
+  var password = prompt("Please choose a desired length for your password between 8 and 124 characters.");
 
   if (password !== null) {
-    if (
-      password.length >= 8 &&
-      password.length <= 128 &&
-      /[0-9]/.test(password) &&
-      /[A-Z]/.test(password) &&
-      /[a-z]/.test(password) &&
-      /[!@#$%^&*:;,.?~\\-]/.test(password)
-    ) {
-      alert("Password accepted");
+
+    passwordLength = parseInt(password);
+
+    if (isNaN(passwordLength) || passwordLength < 8 || passwordLength > 128) {
+      alert("Invalid password length. Please enter a number between 8 and 128.");
     } else {
-      alert("Password must be between 8 and 128 characters and contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character.");
-      generatePassword();
+      includeLowercase = confirm("Include lowercase letters in your password?");
+      includeUppercase = confirm("Include uppercase letters in your password?");
+      includeNumbers = confirm("Include numbers in your password?")
+      includeSpecialCharacters = confirm("Include special characters in your password?");
+      if (!includeLowercase && !includeUppercase && !includeNumbers && !includeSpecialCharacters) {
+        alert("You must select at least one character type to include.");
+      } else {
+        alert("Password Criteria collected. Generating password...");
+        var generatedPassword = generatePassword (passwordLength, includeLowercase, includeUppercase, includeNumbers, includeSpecialCharacters);
+      }
     }
-  } else {
-    alert("Password input canceled.");
-  }
+
+} else {
+  alert("Password generation canceled.")
 }
+
+function generatePassword(length, useLowercase, useUppercase, useNumbers, useSpecialCharacters) {
 
 
 
@@ -55,3 +69,9 @@ generateBtn.addEventListener("click", writePassword);
 // THEN a password is generated that matches the selected criteria
 // WHEN the password is generated
 // THEN the password is either displayed in an alert or written to the page
+password.length >= 8 &&
+password.length <= 128 &&
+/[0-9]/.test(password) &&
+/[A-Z]/.test(password) &&
+/[a-z]/.test(password) &&
+/[!@#$%^&*:;,.?~\\-]/.test(password)
