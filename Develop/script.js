@@ -3,15 +3,26 @@ var generateBtn = document.querySelector("#generate");
 
 function generatePassword() {
 
-  var password = prompt("Please enter a password of at least 8 characters and no more than 128 characters:")
+  var password = prompt("Please enter a password of at least 8 characters and no more than 128 characters:");
 
   if (password !== null) {
-    if (password.length >=8 && password.length <= 128) {
+    if (password.length >=8 && 
+    password.length <= 128) 
+    /{[0-9]/.test(password) &&
+    /[A-Z]/.test(password) &&
+    /[a-z]/.test(password) && 
+    /[!@#$%^&*:;,.?~\\-]/.test(password)
+  
+  } {
       alert("Password accepted");
+    } else {
+      alert("Password must be between 8 and 128 characters and contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character.");
+      generatePassword();
+    }
+    } else {
+      alert("Password input canceled.");
     }
   }
-
-
 
 }
 
