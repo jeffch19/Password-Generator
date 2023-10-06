@@ -38,40 +38,35 @@ function generatePassword(length, useLowercase, useUppercase, useNumbers, useSpe
         alert("You must select at least one character type to include.");
       } else {
         alert("Password criteria collected. Generating password...");
-        var generatedPassword = generatePassword(passwordLength, includeLowercase, includeUppercase, includeNumbers, includeSpecialCharacters);
+        var generatedPassword = "";
+
+        if (includeLowercase) {
+          charSet += lowercaseChars;
+        }
+  
+        if (includeUppercase) {
+          charSet += uppercaseChars;
+        }
+  
+        if (includeNumbers) {
+          charSet += numberChars;
+        }
+  
+        if (includeSpecialCharacters) {
+          charSet += specialChars;
+        }
+  
+        for (let i = 0; i < passwordLength; i++) {
+          generatedPassword += getRandomCharacter(charSet);
+        }
+  
         alert("Generated password: " + generatedPassword);
       }
     }
   } else {
     alert("Password generation canceled.");
   }
-
-  if (useLowercase) {
-    charSet += lowercaseChars;
-  }
-  
-  if (useUppercase) {
-    charSet += uppercaseChars;
-  }
-  
-  if (useNumbers) {
-    charSet += numberChars;
-  }
-  
-  if (useSpecialCharacters) {
-    charSet += specialChars;
-  }
-  
-  let generatedPassword = "";
-
-  for (let i = 0; i < length; i++) {
-    generatedPassword += getRandomCharacter(charSet);
-  }
-
-  return generatedPassword;
 }
-
-
 
 
 
