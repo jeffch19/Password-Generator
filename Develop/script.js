@@ -59,8 +59,8 @@ function generatePassword(length, useLowercase, useUppercase, useNumbers, useSpe
         for (let i = 0; i < passwordLength; i++) {
           generatedPassword += getRandomCharacter(charSet);
         }
-  
-        alert("Generated password: " + generatedPassword);
+        return generatedPassword;
+        
       }
     }
   } else {
@@ -80,6 +80,8 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
+  
+  
 
 }
 
