@@ -6,16 +6,13 @@ var includeUppercase = false;
 var includeNumbers = false;
 var includeSpecialCharacters = false;
 
-
 // Generate a random Character from a character set
-
 function getRandomCharacter(charSet) {
   const randomIndex = Math.floor(Math.random() * charSet.length);
   return charSet.charAt(randomIndex);
 }
 
 // Generate password
-
 function generatePassword(length, useLowercase, useUppercase, useNumbers, useSpecialCharacters) {
   const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
   const uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -23,7 +20,32 @@ function generatePassword(length, useLowercase, useUppercase, useNumbers, useSpe
   const specialChars = "!@#$%^&*()-_=+[]{}|;:'\",.<>?/\\";
   
   let charSet = "";
-  
+
+  // Collect password criteria
+  var password = prompt("Please choose a desired length for your password between 8 and 124 characters.");
+
+  if (password !== null) {
+    passwordLength = parseInt(password);
+
+    if (isNaN(passwordLength) || passwordLength < 8 || passwordLength > 128) {
+      alert("Invalid password length. Please enter a number between 8 and 128.");
+    } else {
+      includeLowercase = confirm("Include lowercase letters in your password?");
+      includeUppercase = confirm("Include uppercase letters in your password?");
+      includeNumbers = confirm("Include numbers in your password?");
+      includeSpecialCharacters = confirm("Include special characters in your password?");
+      if (!includeLowercase && !includeUppercase && !includeNumbers && !includeSpecialCharacters) {
+        alert("You must select at least one character type to include.");
+      } else {
+        alert("Password criteria collected. Generating password...");
+        var generatedPassword = generatePassword(passwordLength, includeLowercase, includeUppercase, includeNumbers, includeSpecialCharacters);
+        alert("Generated password: " + generatedPassword);
+      }
+    }
+  } else {
+    alert("Password generation canceled.");
+  }
+
   if (useLowercase) {
     charSet += lowercaseChars;
   }
@@ -48,38 +70,6 @@ function generatePassword(length, useLowercase, useUppercase, useNumbers, useSpe
 
   return generatedPassword;
 }
-
-
-
-
-// Collect password criteria
-
-function getPasswordCriteria() {
-  var password = prompt("Please choose a desired length for your password between 8 and 124 characters.");
-
-  if (password !== null) {
-    passwordLength = parseInt(password);
-
-    if (isNaN(passwordLength) || passwordLength < 8 || passwordLength > 128) {
-      alert("Invalid password length. Please enter a number between 8 and 128.");
-    } else {
-      includeLowercase = confirm("Include lowercase letters in your password?");
-      includeUppercase = confirm("Include uppercase letters in your password?");
-      includeNumbers = confirm("Include numbers in your password?");
-      includeSpecialCharacters = confirm("Include special characters in your password?");
-      if (!includeLowercase && !includeUppercase && !includeNumbers && !includeSpecialCharacters) {
-        alert("You must select at least one character type to include.");
-      } else {
-        alert("Password criteria collected. Generating password...");
-        var generatedPassword = generatePassword(passwordLength, includeLowercase, includeUppercase, includeNumbers, includeSpecialCharacters);
-        alert("Generated password: " + generatedPassword);
-      }
-    }
-  } else {
-    alert("Password generation canceled.");
-  }
-}
-
 
 
 
